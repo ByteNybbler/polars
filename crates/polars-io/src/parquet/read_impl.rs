@@ -681,6 +681,12 @@ impl BatchedParquetReader {
     }
 
     /// Peeks at the chunks that have been preloaded by the reader and
+    /// returns how many are buffered.
+    pub fn buffered_chunks_len(&self) -> usize {
+        self.chunks_fifo.len()
+    }
+
+    /// Peeks at the chunks that have been preloaded by the reader and
     /// estimates their total size in bytes.
     pub fn buffered_chunks_estimated_size(&self) -> usize {
         self.chunks_fifo.iter().map(|df| df.estimated_size()).sum()
